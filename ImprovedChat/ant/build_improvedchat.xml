@@ -5,7 +5,7 @@
 <project name="ImprovedChat" basedir="." default="main">
     
     <!-- Change this into the directory of the MCP folder. -->
-    <property name="mcp.dir"        location="../../../" />
+    <property name="mcp.dir"        location="../../../../Documents/mcmodding/mcp903" />
     <!-- Path to the python executable used by MCP, change if using a non-windows OS -->
     <property name="python"         location="/usr/bin/python" />
 
@@ -112,6 +112,7 @@
             <fileset dir="${eclipse.dir}/${lib}/java" />
             <!-- Maven default -->
             <fileset dir="${eclipse.dir}/${lib}/src/main/java" />
+            <fileset dir="/Users/julian/git/${lib}/${lib}/src" />
         </copy>
     </target>
 
