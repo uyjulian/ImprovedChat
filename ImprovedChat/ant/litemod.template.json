@@ -1,0 +1,8 @@
+{
+    "name": "${ant.project.name}",
+    "mcversion": "${litemodversion}",
+    "version": "${version}",
+    "revision": "${build.number}",
+    "author": "${author}",
+    "description": "Legacy 'Improved Chat' mod updated for Minecraft ${litemodversion} by ${author}."
+}
