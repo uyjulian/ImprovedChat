@@ -87,8 +87,8 @@ public class LiteModImprovedChat implements InitCompleteListener, RenderListener
 		{
 			try
 			{
-				// TODO Obfuscation - last update @ 1.6.4
-				Field fChat = GuiIngame.class.getDeclaredField(ModUtilities.getObfuscatedFieldName("persistantChatGUI", "h", "field_73840_e"));
+				// TODO Obfuscation - 1.7.2
+				Field fChat = GuiIngame.class.getDeclaredField(ModUtilities.getObfuscatedFieldName("persistantChatGUI", "l", "field_73840_e"));
 				fChat.setAccessible(true);
 				if (persistentChatGui == null) persistentChatGui = new GuiImprovedChatNewChat(minecraft);
 				fChat.set(minecraft.ingameGUI, persistentChatGui);
