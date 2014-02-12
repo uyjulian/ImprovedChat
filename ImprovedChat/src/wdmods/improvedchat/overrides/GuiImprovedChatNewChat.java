@@ -94,7 +94,6 @@ public class GuiImprovedChatNewChat extends GuiNewChat
 	@Override
 	public boolean getChatOpen()
 	{
-		// TODO Auto-generated method stub
 		return super.getChatOpen() || mc.currentScreen instanceof GuiImprovedChat;
 	}
 
