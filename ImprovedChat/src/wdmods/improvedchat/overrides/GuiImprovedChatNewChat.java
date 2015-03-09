@@ -51,13 +51,13 @@ public class GuiImprovedChatNewChat extends GuiNewChat
             	chatOpen = true;
             }
             
-            int chatLines = ImprovedChat.drawChatHistory(this, mc.fontRenderer, chatOpen, visibleLineCount, updateCounter);
+            int chatLines = ImprovedChat.drawChatHistory(this, mc.fontRendererObj, chatOpen, visibleLineCount, updateCounter);
 
             if (totalLines > 0)
             {
                 if (chatOpen)
                 {
-                    int fontHeight = mc.fontRenderer.FONT_HEIGHT;
+                    int fontHeight = mc.fontRendererObj.FONT_HEIGHT;
                     glTranslatef(0.0F, fontHeight, 0.0F);
                     int totalHeight = totalLines * fontHeight + totalLines;
                     int visibleHeight = chatLines * fontHeight + chatLines;
@@ -222,7 +222,7 @@ public class GuiImprovedChatNewChat extends GuiNewChat
     public void addImpChatLine(ImprovedChatLine line)
     {
         chatLines.add(line);
-        sentMessages.add(line.func_151461_a().getFormattedText());
+        sentMessages.add(line.getChatComponent().getFormattedText());
     }
 
     private List<ImprovedChatLine> getImprovedLines()

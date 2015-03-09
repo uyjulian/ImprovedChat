@@ -7,6 +7,7 @@ import java.net.SocketAddress;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
+import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.INetHandler;
 import net.minecraft.network.NetHandlerPlayServer;
 import net.minecraft.network.login.INetHandlerLoginClient;
@@ -19,11 +20,13 @@ import org.lwjgl.input.Mouse;
 
 import wdmods.improvedchat.overrides.GuiImprovedChatNewChat;
 
+import com.mojang.realmsclient.dto.RealmsServer;
 import com.mumfrey.liteloader.ChatFilter;
 import com.mumfrey.liteloader.InitCompleteListener;
 import com.mumfrey.liteloader.JoinGameListener;
 import com.mumfrey.liteloader.RenderListener;
 import com.mumfrey.liteloader.core.LiteLoader;
+import com.mumfrey.liteloader.core.LiteLoaderEventBroker.ReturnValue;
 import com.mumfrey.liteloader.util.ModUtilities;
 
 /**
@@ -87,7 +90,7 @@ public class LiteModImprovedChat implements InitCompleteListener, RenderListener
 		{
 			try
 			{
-				// TODO Obfuscation - 1.7.2
+				// TODO Obfuscation - 1.8
 				Field fChat = GuiIngame.class.getDeclaredField(ModUtilities.getObfuscatedFieldName("persistantChatGUI", "l", "field_73840_e"));
 				fChat.setAccessible(true);
 				if (persistentChatGui == null) persistentChatGui = new GuiImprovedChatNewChat(minecraft);
@@ -118,32 +121,6 @@ public class LiteModImprovedChat implements InitCompleteListener, RenderListener
 	@Override
 	public void onRenderWorld()
 	{
-	}
-	
-	@Override
-	public boolean onChat(S02PacketChat chatPacket, IChatComponent chat, String message)
-	{
-		return true;
-	}
-	
-	@Override
-	public void onJoinGame(INetHandler netHandler, S01PacketJoinGame joinGamePacket)
-	{
-		if (netHandler instanceof NetHandlerPlayServer)
-		{
-			SocketAddress socketAddress = ((NetHandlerPlayServer)netHandler).func_147362_b().getSocketAddress();
-			
-			if (socketAddress instanceof InetSocketAddress)
-			{
-				InetSocketAddress inetAddr = (InetSocketAddress)socketAddress;
-				
-				String serverName = inetAddr.getHostName();
-				int serverPort = inetAddr.getPort();
-				
-		        System.out.println("[ImprovedChat] Loading settings for " + serverName + ":" + serverPort);
-		        ImprovedChat.setCurrent(serverName + "_" + serverPort);
-			}
-		}
 	}
 	
 	@Override
@@ -195,6 +172,35 @@ public class LiteModImprovedChat implements InitCompleteListener, RenderListener
 	@Override
 	public void onSetupCameraTransform()
 	{
+	}
+
+	@Override
+	public void onJoinGame(INetHandler netHandler,
+			S01PacketJoinGame joinGamePacket, ServerData serverData,
+			RealmsServer realmsServer) {
+		if (netHandler instanceof NetHandlerPlayServer)
+		{
+			SocketAddress socketAddress = ((NetHandlerPlayServer)netHandler).getNetworkManager().getRemoteAddress();
+			
+			if (socketAddress instanceof InetSocketAddress)
+			{
+				InetSocketAddress inetAddr = (InetSocketAddress)socketAddress;
+				
+				String serverName = inetAddr.getHostName();
+				int serverPort = inetAddr.getPort();
+				
+		        System.out.println("[ImprovedChat] Loading settings for " + serverName + ":" + serverPort);
+		        ImprovedChat.setCurrent(serverName + "_" + serverPort);
+			}
+		}
+		
+	}
+
+	@Override
+	public boolean onChat(IChatComponent chat, String message,
+			ReturnValue<IChatComponent> newMessage) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 
 	

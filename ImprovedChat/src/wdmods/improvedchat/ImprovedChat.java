@@ -38,7 +38,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.ChatAllowedCharacters;
@@ -953,7 +953,7 @@ public class ImprovedChat
 
     public static FontRenderer getFontRenderer()
     {
-        return ImprovedChat.minecraft.fontRenderer;
+        return ImprovedChat.minecraft.fontRendererObj;
     }
 
     public static String processOutput(String text)
@@ -1127,10 +1127,10 @@ public class ImprovedChat
 
     public static String getChatMessageOfChatLine(ImprovedChatLine line)
     {
-        return line.func_151461_a().getFormattedText();
+        return line.getChatComponent().getFormattedText();
     }
 
-    public static EntityClientPlayerMP getPlayer()
+    public static EntityPlayerSP getPlayer()
     {
         return ImprovedChat.minecraft.thePlayer;
     }
@@ -1277,7 +1277,7 @@ public class ImprovedChat
 
     public static char[] getAllowedCharacters()
     {
-        return ChatAllowedCharacters.allowedCharacters;
+        return ChatAllowedCharacters.allowedCharactersArray;
     }
 
     public static Server getCurrentServer()

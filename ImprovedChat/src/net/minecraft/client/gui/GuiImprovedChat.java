@@ -1,5 +1,6 @@
 package net.minecraft.client.gui;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -58,7 +59,7 @@ public class GuiImprovedChat extends GuiChat
         Keyboard.enableRepeatEvents(true);
         sentHistoryCursor = mc.ingameGUI.getChatGUI().getSentMessages().size();
         
-        inputField = new GuiImprovedChatTextField(fontRendererObj, 4, height - 12, width - 4, 12);
+        inputField = new GuiImprovedChatTextField(0, fontRendererObj, 4, height - 12, width - 4, 12);
         inputField.setMaxStringLength(ImprovedChat.getChatLineMaxLength());
         inputField.setEnableBackgroundDrawing(false);
         inputField.setFocused(true);
@@ -138,9 +139,10 @@ public class GuiImprovedChat extends GuiChat
 
     /**
      * Handles mouse input.
+     * @throws IOException 
      */
     @Override
-	public void handleMouseInput()
+	public void handleMouseInput() throws IOException
     {
         super.handleMouseInput();
         int scrollAmount = Mouse.getEventDWheel();

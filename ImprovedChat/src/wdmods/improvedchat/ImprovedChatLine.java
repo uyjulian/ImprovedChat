@@ -46,7 +46,7 @@ public class ImprovedChatLine extends ChatLine
     }
 
     @Override
-	public IChatComponent func_151461_a()
+	public IChatComponent getChatComponent()
     {
         return this.lineString;
     }

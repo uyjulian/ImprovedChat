@@ -59,14 +59,14 @@ public class GuiImprovedChatTextField extends GuiTextField
     /** True if this textbox is visible */
     private boolean visible = true;
 
-    public GuiImprovedChatTextField(FontRenderer fontRenderer, int xPos, int yPos, int width, int height)
+    public GuiImprovedChatTextField(int p_i45542_1_, FontRenderer p_i45542_2_, int p_i45542_3_, int p_i45542_4_, int p_i45542_5_, int p_i45542_6_)
     {
-    	super(fontRenderer, xPos, yPos, width, height);
-        this.fontRenderer = fontRenderer;
-        this.xPos = xPos;
-        this.yPos = yPos;
-        this.width = width;
-        this.height = height;
+    	super(p_i45542_1_, p_i45542_2_, p_i45542_3_, p_i45542_4_, p_i45542_5_, p_i45542_6_);
+        this.fontRenderer = p_i45542_2_;
+        this.xPos = p_i45542_3_;
+        this.yPos = p_i45542_4_;
+        this.width = p_i45542_5_;
+        this.height = p_i45542_6_;
     }
 
     /**
@@ -123,7 +123,7 @@ public class GuiImprovedChatTextField extends GuiTextField
 	public void writeText(String text)
     {
         String newText = "";
-        String filteredText = ChatAllowedCharacters.filerAllowedCharacters(text);
+        String filteredText = ChatAllowedCharacters.filterAllowedCharacters(text);
         int selStart = cursorPosition < selectionEnd ? cursorPosition : selectionEnd;
         int selEnd = cursorPosition < selectionEnd ? selectionEnd : cursorPosition;
         int availableChars = maxStringLength - this.text.length() - (selStart - selectionEnd);
@@ -613,16 +613,16 @@ public class GuiImprovedChatTextField extends GuiTextField
             y2 = temp;
         }
 
-        Tessellator tessellator = Tessellator.instance;
+        Tessellator tessellator = Tessellator.getInstance();
         glColor4f(0.0F, 0.0F, 255.0F, 255.0F);
         glDisable(GL_TEXTURE_2D);
         glEnable(GL_COLOR_LOGIC_OP);
         glLogicOp(GL_OR_REVERSE);
-        tessellator.startDrawingQuads();
-        tessellator.addVertex(x1, y2, 0.0D);
-        tessellator.addVertex(x2, y2, 0.0D);
-        tessellator.addVertex(x2, y1, 0.0D);
-        tessellator.addVertex(x1, y1, 0.0D);
+        tessellator.getWorldRenderer().startDrawingQuads();
+        tessellator.getWorldRenderer().addVertex(x1, y2, 0.0D);
+        tessellator.getWorldRenderer().addVertex(x2, y2, 0.0D);
+        tessellator.getWorldRenderer().addVertex(x2, y1, 0.0D);
+        tessellator.getWorldRenderer().addVertex(x1, y1, 0.0D);
         tessellator.draw();
         glDisable(GL_COLOR_LOGIC_OP);
         glEnable(GL_TEXTURE_2D);
