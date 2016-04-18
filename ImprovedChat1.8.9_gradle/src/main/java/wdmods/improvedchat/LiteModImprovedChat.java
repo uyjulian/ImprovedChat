@@ -28,6 +28,7 @@ import com.mumfrey.liteloader.RenderListener;
 import com.mumfrey.liteloader.core.LiteLoader;
 import com.mumfrey.liteloader.core.LiteLoaderEventBroker.ReturnValue;
 import com.mumfrey.liteloader.util.ModUtilities;
+import com.mumfrey.liteloader.util.ObfuscationUtilities;
 
 /**
  * LiteLoader adapter class for Improved Chat
@@ -90,8 +91,8 @@ public class LiteModImprovedChat implements InitCompleteListener, RenderListener
 		{
 			try
 			{
-				// TODO Obfuscation - 1.8
-				Field fChat = GuiIngame.class.getDeclaredField(ModUtilities.getObfuscatedFieldName("persistantChatGUI", "l", "field_73840_e"));
+				// TODO Obfuscation - 1.8.9
+				Field fChat = GuiIngame.class.getDeclaredField(ObfuscationUtilities.getObfuscatedFieldName("persistantChatGUI", "l", "field_73840_e"));
 				fChat.setAccessible(true);
 				if (persistentChatGui == null) persistentChatGui = new GuiImprovedChatNewChat(minecraft);
 				fChat.set(minecraft.ingameGUI, persistentChatGui);
@@ -113,14 +114,6 @@ public class LiteModImprovedChat implements InitCompleteListener, RenderListener
 		{
 			minecraft.currentScreen = new GuiImprovedChatSleeping((GuiSleepMP)minecraft.currentScreen);
 		}
-	}
-
-	/* (non-Javadoc)
-	 * @see com.mumfrey.liteloader.RenderListener#onRenderWorld()
-	 */
-	@Override
-	public void onRenderWorld()
-	{
 	}
 	
 	@Override

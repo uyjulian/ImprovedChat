@@ -618,12 +618,13 @@ public class GuiImprovedChatTextField extends GuiTextField
         glDisable(GL_TEXTURE_2D);
         glEnable(GL_COLOR_LOGIC_OP);
         glLogicOp(GL_OR_REVERSE);
-        tessellator.getWorldRenderer().startDrawingQuads();
-        tessellator.getWorldRenderer().addVertex(x1, y2, 0.0D);
-        tessellator.getWorldRenderer().addVertex(x2, y2, 0.0D);
-        tessellator.getWorldRenderer().addVertex(x2, y1, 0.0D);
-        tessellator.getWorldRenderer().addVertex(x1, y1, 0.0D);
-        tessellator.draw();
+        //TODO: fix vertical cursor
+//        tessellator.getWorldRenderer().startDrawingQuads();
+//        tessellator.getWorldRenderer().addVertex(x1, y2, 0.0D);
+//        tessellator.getWorldRenderer().addVertex(x2, y2, 0.0D);
+//        tessellator.getWorldRenderer().addVertex(x2, y1, 0.0D);
+//        tessellator.getWorldRenderer().addVertex(x1, y1, 0.0D);
+//        tessellator.draw();
         glDisable(GL_COLOR_LOGIC_OP);
         glEnable(GL_TEXTURE_2D);
     }
